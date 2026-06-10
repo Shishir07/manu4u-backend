@@ -1,0 +1,2620 @@
+{
+  "version": "1.0",
+  "testCases": [
+
+    {
+      "id": "time-today-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "time_resolution",
+      "tags": ["single-date", "today"],
+      "question": "Did United play today?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures"],
+          "requiredOrder": [["resolve_time", "get_fixtures"]],
+          "forbiddenTools": ["get_fixtures_range"],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)today"] },
+          { "toolName": "get_fixtures", "argPatterns": ["\\d{4}-\\d{2}-\\d{2}"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(manchester united|no fixture|no match|played|did not play)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot|sorry.*error)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "time-yesterday-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "time_resolution",
+      "tags": ["single-date", "yesterday"],
+      "question": "What happened in United's match yesterday?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures"],
+          "requiredOrder": [["resolve_time", "get_fixtures"]],
+          "forbiddenTools": ["get_fixtures_range"],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)yesterday"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(match|fixture|played|no game|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "time-tomorrow-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "time_resolution",
+      "tags": ["single-date", "tomorrow"],
+      "question": "Is United playing tomorrow?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures"],
+          "requiredOrder": [["resolve_time", "get_fixtures"]],
+          "forbiddenTools": ["get_fixtures_range"],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)tomorrow"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(yes|no|playing|fixture|no match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "time-last-week-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "time_resolution",
+      "tags": ["range", "last-week"],
+      "question": "How did United do last week?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures_range"],
+          "requiredOrder": [["resolve_time", "get_fixtures_range"]],
+          "forbiddenTools": ["get_fixtures"],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)last week"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(last week|no fixture|played|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "time-this-week-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "time_resolution",
+      "tags": ["range", "this-week"],
+      "question": "Show me United's matches this week",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures_range"],
+          "requiredOrder": [["resolve_time", "get_fixtures_range"]],
+          "forbiddenTools": ["get_fixtures"],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)this week"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(this week|fixture|match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "time-next-week-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "time_resolution",
+      "tags": ["range", "next-week"],
+      "question": "When does United play next week?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures_range"],
+          "requiredOrder": [["resolve_time", "get_fixtures_range"]],
+          "forbiddenTools": ["get_fixtures"],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)next week"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(next week|fixture|match|no game|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "time-this-month-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "time_resolution",
+      "tags": ["range", "this-month"],
+      "question": "What matches does United have this month?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures_range"],
+          "requiredOrder": [["resolve_time", "get_fixtures_range"]],
+          "forbiddenTools": ["get_fixtures"],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)this month"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(this month|fixture|match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "time-last-month-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "time_resolution",
+      "tags": ["range", "last-month"],
+      "question": "How many games did United play last month?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures_range"],
+          "requiredOrder": [["resolve_time", "get_fixtures_range"]],
+          "forbiddenTools": ["get_fixtures"],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)last month"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(last month|game|match|fixture|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "time-this-season-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "time_resolution",
+      "tags": ["range", "season"],
+      "question": "Show me all United's results this season",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures_range"],
+          "requiredOrder": [["resolve_time", "get_fixtures_range"]],
+          "forbiddenTools": ["get_fixtures"],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)this season"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(season|fixture|match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "time-next-saturday-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "time_resolution",
+      "tags": ["single-date", "day-of-week"],
+      "question": "Is United playing next Saturday?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures"],
+          "requiredOrder": [["resolve_time", "get_fixtures"]],
+          "forbiddenTools": ["get_fixtures_range"],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)next saturday"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(saturday|fixture|match|no game|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "time-last-sunday-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "time_resolution",
+      "tags": ["single-date", "day-of-week"],
+      "question": "Did United play last Sunday?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures"],
+          "requiredOrder": [["resolve_time", "get_fixtures"]],
+          "forbiddenTools": ["get_fixtures_range"],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)last sunday"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(sunday|fixture|match|no game|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "time-last-7-days-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "time_resolution",
+      "tags": ["range", "relative"],
+      "question": "What matches has United played in the last 7 days?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures_range"],
+          "requiredOrder": [["resolve_time", "get_fixtures_range"]],
+          "forbiddenTools": ["get_fixtures"],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)(last 7 days|7)"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(7 days|last|fixture|match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "time-last-30-days-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "time_resolution",
+      "tags": ["range", "relative"],
+      "question": "Show me United's fixtures over the last 30 days",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures_range"],
+          "requiredOrder": [["resolve_time", "get_fixtures_range"]],
+          "forbiddenTools": ["get_fixtures"],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)(last 30 days|30)"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(30 days|fixture|match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "time-next-tuesday-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "time_resolution",
+      "tags": ["single-date", "day-of-week"],
+      "question": "Is there a United game next Tuesday?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures"],
+          "requiredOrder": [["resolve_time", "get_fixtures"]],
+          "forbiddenTools": ["get_fixtures_range"],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)next tuesday"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(tuesday|fixture|match|no game|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "time-last-season-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "time_resolution",
+      "tags": ["range", "season"],
+      "question": "How many matches did United play last season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures_range"],
+          "requiredOrder": [["resolve_time", "get_fixtures_range"]],
+          "forbiddenTools": ["get_fixtures"],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)last season"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(last season|fixture|match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+
+    {
+      "id": "match-scorers-yesterday-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "match_queries",
+      "tags": ["events", "goals", "yesterday"],
+      "question": "Who scored in United's match yesterday?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures", "get_events"],
+          "requiredOrder": [["resolve_time", "get_fixtures"], ["get_fixtures", "get_events"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)yesterday"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|scored|no goal|no match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "match-scorers-today-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "match_queries",
+      "tags": ["events", "goals", "today"],
+      "question": "Who scored in today's United match?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures"],
+          "requiredOrder": [["resolve_time", "get_fixtures"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)today"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|scored|no goal|no match|no fixture|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "match-lineup-yesterday-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "match_queries",
+      "tags": ["lineups", "yesterday"],
+      "question": "What was United's lineup yesterday?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures", "get_lineups"],
+          "requiredOrder": [["resolve_time", "get_fixtures"], ["get_fixtures", "get_lineups"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)yesterday"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(lineup|formation|starting|no match|no lineup|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "match-stats-yesterday-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "match_queries",
+      "tags": ["stats", "yesterday"],
+      "question": "What were the match stats from yesterday's United game?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures", "get_match_stats"],
+          "requiredOrder": [["resolve_time", "get_fixtures"], ["get_fixtures", "get_match_stats"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)yesterday"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(possession|shot|stat|no match|no fixture|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "match-result-last-match-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "match_queries",
+      "tags": ["result", "last-match"],
+      "question": "What was the result of United's last match?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures"],
+          "requiredOrder": [["resolve_time", "get_fixtures"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(result|won|lost|drew|score|no match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "match-formation-last-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "match_queries",
+      "tags": ["lineups", "formation"],
+      "question": "What formation did United use in their last game?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures", "get_lineups"],
+          "requiredOrder": [["resolve_time", "get_fixtures"], ["get_fixtures", "get_lineups"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(formation|4-|3-|no lineup|no match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "match-cards-yesterday-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "match_queries",
+      "tags": ["events", "cards"],
+      "question": "Were there any red or yellow cards in yesterday's United match?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures", "get_events"],
+          "requiredOrder": [["resolve_time", "get_fixtures"], ["get_fixtures", "get_events"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)yesterday"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(card|yellow|red|no card|no match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "match-subs-yesterday-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "match_queries",
+      "tags": ["events", "substitutions"],
+      "question": "What substitutions did United make yesterday?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures", "get_events"],
+          "requiredOrder": [["resolve_time", "get_fixtures"], ["get_fixtures", "get_events"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)yesterday"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(substitut|sub|no match|no event|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "match-possession-yesterday-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "match_queries",
+      "tags": ["stats", "possession"],
+      "question": "How much possession did United have yesterday?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures", "get_match_stats"],
+          "requiredOrder": [["resolve_time", "get_fixtures"], ["get_fixtures", "get_match_stats"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)yesterday"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(possession|%|no stat|no match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "match-shots-last-game-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "match_queries",
+      "tags": ["stats", "shots"],
+      "question": "How many shots did United have on target last game?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures", "get_match_stats"],
+          "requiredOrder": [["resolve_time", "get_fixtures"], ["get_fixtures", "get_match_stats"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(shot|target|no stat|no match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "match-last-week-results-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "match_queries",
+      "tags": ["result", "last-week"],
+      "question": "What were the results of United's matches last week?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures_range"],
+          "requiredOrder": [["resolve_time", "get_fixtures_range"]],
+          "forbiddenTools": ["get_fixtures"],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)last week"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(result|won|lost|drew|no match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "match-opponent-yesterday-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "match_queries",
+      "tags": ["result", "opponent"],
+      "question": "Who did United play against yesterday?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures"],
+          "requiredOrder": [["resolve_time", "get_fixtures"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)yesterday"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(played|against|vs|no match|no fixture|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "match-var-yesterday-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "match_queries",
+      "tags": ["events", "var"],
+      "question": "Were there any VAR decisions in United's last match?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures", "get_events"],
+          "requiredOrder": [["resolve_time", "get_fixtures"], ["get_fixtures", "get_events"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(VAR|decision|no VAR|no event|no match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "match-away-home-yesterday-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "match_queries",
+      "tags": ["result", "venue"],
+      "question": "Was United's match yesterday a home or away game?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures"],
+          "requiredOrder": [["resolve_time", "get_fixtures"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)yesterday"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(home|away|Old Trafford|no match|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "match-this-week-upcoming-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "match_queries",
+      "tags": ["upcoming", "this-week"],
+      "question": "What fixtures does United have coming up this week?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures_range"],
+          "requiredOrder": [["resolve_time", "get_fixtures_range"]],
+          "forbiddenTools": ["get_fixtures"],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)this week"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(fixture|match|upcoming|this week|manchester united)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+
+    {
+      "id": "player-bruno-goals-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "player_stats",
+      "tags": ["find-player", "goals"],
+      "question": "How many goals has Bruno Fernandes scored this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player"],
+          "requiredOrder": [],
+          "forbiddenTools": ["get_top_scorers"],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)(bruno|fernandes)"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|scored|appearance|no data|not found|Bruno Fernandes)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "player-rashford-assists-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "player_stats",
+      "tags": ["find-player", "assists"],
+      "question": "How many assists does Rashford have this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player"],
+          "requiredOrder": [],
+          "forbiddenTools": ["get_top_assists"],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)rashford"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(assist|goal|appearance|no data|not found|Rashford|Marcus)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "player-maguire-stats-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "player_stats",
+      "tags": ["find-player", "defender"],
+      "question": "How has Harry Maguire performed this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)(maguire|harry)"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(appearance|card|rating|no data|not found|Maguire)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "player-garnacho-stats-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "player_stats",
+      "tags": ["find-player", "winger"],
+      "question": "What are Garnacho's stats this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)garnacho"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|assist|appearance|no data|not found|Garnacho)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "player-onana-stats-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "player_stats",
+      "tags": ["find-player", "goalkeeper"],
+      "question": "How is Onana performing this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)onana"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(appearance|rating|no data|not found|Onana)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "player-dalot-stats-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "player_stats",
+      "tags": ["find-player", "defender"],
+      "question": "What are Diogo Dalot's stats this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)(dalot|diogo)"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(appearance|assist|no data|not found|Dalot)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "player-mainoo-stats-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "player_stats",
+      "tags": ["find-player", "midfielder"],
+      "question": "How many appearances has Kobbie Mainoo made this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)(mainoo|kobbie)"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(appearance|game|no data|not found|Mainoo)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "player-hojlund-goals-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "player_stats",
+      "tags": ["find-player", "goals", "striker"],
+      "question": "How many goals has Hojlund scored this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)(hojlund|h.jlund|rasmus)"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|scored|appearance|no data|not found|Hojlund|Højlund)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "player-mount-stats-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "player_stats",
+      "tags": ["find-player", "midfielder"],
+      "question": "What are Mason Mount's stats this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)(mount|mason)"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(appearance|goal|assist|no data|not found|Mount)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "player-top-scorer-pl-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "player_stats",
+      "tags": ["top-scorers", "premier-league"],
+      "question": "Who is the Premier League top scorer this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_top_scorers"],
+          "requiredOrder": [],
+          "forbiddenTools": ["find_player"],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_top_scorers", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|top scorer|leading|Premier League)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "player-top-assists-pl-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "player_stats",
+      "tags": ["top-assists", "premier-league"],
+      "question": "Who has the most assists in the Premier League?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_top_assists"],
+          "requiredOrder": [],
+          "forbiddenTools": ["find_player"],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_top_assists", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(assist|provider|Premier League)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "player-yellow-cards-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "player_stats",
+      "tags": ["find-player", "cards"],
+      "question": "How many yellow cards has Bruno Fernandes picked up this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)(bruno|fernandes)"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(yellow|card|no data|not found|Bruno|Fernandes)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "player-minutes-played-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "player_stats",
+      "tags": ["find-player", "minutes"],
+      "question": "How many minutes has Rashford played this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)rashford"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(minute|appearance|no data|not found|Rashford)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "player-rating-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "player_stats",
+      "tags": ["find-player", "rating"],
+      "question": "What is Garnacho's average rating this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)garnacho"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(rating|performance|no data|not found|Garnacho)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "player-top-scorer-europa-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "player_stats",
+      "tags": ["top-scorers", "europa-league"],
+      "question": "Who is leading scorer in the Europa League?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_top_scorers"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_top_scorers", "argPatterns": ["leagueId=3"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|top scorer|Europa League)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+
+    {
+      "id": "standings-position-pl-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "standings",
+      "tags": ["position", "premier-league"],
+      "question": "Where are Manchester United in the Premier League table?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_standings"],
+          "requiredOrder": [],
+          "forbiddenTools": ["get_full_table"],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "get_standings", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(position|rank|place|point|Premier League|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "standings-top4-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "standings",
+      "tags": ["position", "top-4"],
+      "question": "Are United in the top 4?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_standings"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_standings", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(top 4|Champions League|position|rank|yes|no|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "standings-full-table-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "standings",
+      "tags": ["full-table", "premier-league"],
+      "question": "Show me the full Premier League table",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_full_table"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_full_table", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(table|team|point|Premier League)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "standings-top-team-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "standings",
+      "tags": ["full-table", "leader"],
+      "question": "Who is top of the Premier League?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_full_table"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_full_table", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(top|first place|leader|Premier League|point)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "standings-points-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "standings",
+      "tags": ["points", "premier-league"],
+      "question": "How many points do United have in the Premier League?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_standings"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "get_standings", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(point|Premier League|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "standings-relegation-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "standings",
+      "tags": ["full-table", "relegation"],
+      "question": "Which teams are in the relegation zone?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_full_table"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_full_table", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(relegation|18th|19th|20th|bottom|team)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "standings-goals-against-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "standings",
+      "tags": ["defensive", "goals-against"],
+      "question": "How many goals have United conceded this season in the league?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_standings"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_standings", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(concede|goal|against|Premier League|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "standings-wins-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "standings",
+      "tags": ["wins", "premier-league"],
+      "question": "How many Premier League games have United won this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_standings"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_standings", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(won|win|victory|Premier League|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "standings-form-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "standings",
+      "tags": ["form", "premier-league"],
+      "question": "What is United's current form in the Premier League?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_standings"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_standings", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(form|W|L|D|recent|Premier League|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "standings-gap-to-top-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "standings",
+      "tags": ["position", "gap"],
+      "question": "How many points behind United are from the top of the table?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_full_table"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_full_table", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(point|behind|gap|top|Premier League|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "standings-europa-position-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "standings",
+      "tags": ["position", "europa-league"],
+      "question": "Where are United in the Europa League group?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_standings"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_standings", "argPatterns": ["leagueId=3"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(Europa|position|rank|point|Manchester United|no data|not available)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "standings-played-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "standings",
+      "tags": ["played", "premier-league"],
+      "question": "How many Premier League games have United played so far?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_standings"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "get_standings", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(played|game|match|Premier League|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+
+    {
+      "id": "injury-team-news-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "injuries",
+      "tags": ["injuries", "team-news"],
+      "question": "Who is currently injured at Manchester United?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_injuries"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "get_injuries", "argPatterns": ["teamId=33"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(injur|no injury|fit|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "injury-squad-availability-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "injuries",
+      "tags": ["injuries", "availability"],
+      "question": "Who is unavailable for United's next match?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_injuries"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_injuries", "argPatterns": ["teamId=33"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(unavailable|injur|suspend|no injury|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "injury-count-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "injuries",
+      "tags": ["injuries", "count"],
+      "question": "How many players are currently injured at United?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_injuries"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "get_injuries", "argPatterns": ["teamId=33"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(injur|player|no injury|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "injury-rashford-fit-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "injuries",
+      "tags": ["injuries", "player-specific"],
+      "question": "Is Rashford fit to play?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_injuries"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_injuries", "argPatterns": ["teamId=33"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(Rashford|fit|injur|available|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "injury-suspensions-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "injuries",
+      "tags": ["suspensions"],
+      "question": "Are any United players suspended?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_injuries"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "get_injuries", "argPatterns": ["teamId=33"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(suspend|ban|injur|no suspension|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "injury-team-news-weekend-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "injuries",
+      "tags": ["injuries", "weekend"],
+      "question": "What's the team news ahead of the weekend?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_injuries"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_injuries", "argPatterns": ["teamId=33"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(team news|injur|fit|available|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "injury-recovery-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "injuries",
+      "tags": ["injuries", "recovery"],
+      "question": "Which United players are recovering from injury?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_injuries"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "get_injuries", "argPatterns": ["teamId=33"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(recover|injur|no injury|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "injury-long-term-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "injuries",
+      "tags": ["injuries", "long-term"],
+      "question": "Are there any long-term injury concerns at United?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_injuries"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "get_injuries", "argPatterns": ["teamId=33"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(injur|long.term|no injury|concern|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+
+    {
+      "id": "top-scorers-pl-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "top_scorers_assists",
+      "tags": ["top-scorers", "premier-league"],
+      "question": "Who are the top 5 scorers in the Premier League?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_top_scorers"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "get_top_scorers", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|scorer|Premier League)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "top-assists-pl-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "top_scorers_assists",
+      "tags": ["top-assists", "premier-league"],
+      "question": "Who leads the Premier League assist charts?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_top_assists"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "get_top_assists", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(assist|leader|Premier League)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "top-scorers-europa-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "top_scorers_assists",
+      "tags": ["top-scorers", "europa-league"],
+      "question": "Who is the top scorer in the Europa League this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_top_scorers"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "get_top_scorers", "argPatterns": ["leagueId=3"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|scorer|Europa)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "top-assists-europa-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "top_scorers_assists",
+      "tags": ["top-assists", "europa-league"],
+      "question": "Who has the most assists in the Europa League?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_top_assists"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "get_top_assists", "argPatterns": ["leagueId=3"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(assist|Europa)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "top-scorers-united-pl-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "top_scorers_assists",
+      "tags": ["top-scorers", "united-specific"],
+      "question": "Which United player has scored the most Premier League goals this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_top_scorers"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_top_scorers", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|scorer|Manchester United|Premier League)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "top-assists-both-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "top_scorers_assists",
+      "tags": ["top-scorers", "top-assists"],
+      "question": "Who is scoring and assisting the most in the Premier League?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_top_scorers", "get_top_assists"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_top_scorers", "argPatterns": ["leagueId=39"] },
+          { "toolName": "get_top_assists", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|assist|scorer|Premier League)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "top-golden-boot-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "top_scorers_assists",
+      "tags": ["top-scorers", "golden-boot"],
+      "question": "Who is favourite for the Premier League golden boot?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_top_scorers"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_top_scorers", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|scorer|golden boot|Premier League)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "top-assists-creative-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "top_scorers_assists",
+      "tags": ["top-assists", "creative"],
+      "question": "Who is the most creative player in the Premier League this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_top_assists"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_top_assists", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(assist|creative|key pass|Premier League)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+
+    {
+      "id": "combined-result-and-table-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "combined_queries",
+      "tags": ["result", "standings"],
+      "question": "How did United do yesterday and where are they in the table now?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures", "get_standings"],
+          "requiredOrder": [["resolve_time", "get_fixtures"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)yesterday"] },
+          { "toolName": "get_standings", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(match|position|point|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "combined-injury-and-upcoming-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "combined_queries",
+      "tags": ["injuries", "upcoming"],
+      "question": "Who's injured and when is United's next match?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_injuries", "resolve_time", "get_fixtures"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_injuries", "argPatterns": ["teamId=33"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(injur|match|fixture|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "combined-scorers-and-standings-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "combined_queries",
+      "tags": ["player-stats", "standings"],
+      "question": "How many goals has Bruno scored and where are United in the table?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player", "get_standings"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)(bruno|fernandes)"] },
+          { "toolName": "get_standings", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|position|point|Bruno|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "combined-last-match-full-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "combined_queries",
+      "tags": ["events", "lineups", "stats"],
+      "question": "Give me a full report on United's last match including scorers, lineup and stats",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures", "get_events", "get_lineups"],
+          "requiredOrder": [["resolve_time", "get_fixtures"], ["get_fixtures", "get_events"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|lineup|formation|stat|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 30000
+      }
+    },
+    {
+      "id": "combined-player-and-injury-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "combined_queries",
+      "tags": ["player-stats", "injuries"],
+      "question": "How is Rashford performing and is he fit?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player", "get_injuries"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)rashford"] },
+          { "toolName": "get_injuries", "argPatterns": ["teamId=33"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(Rashford|goal|assist|fit|injur)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "combined-table-and-top-scorer-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "combined_queries",
+      "tags": ["standings", "top-scorers"],
+      "question": "Who's top of the league and who's the top scorer?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_full_table", "get_top_scorers"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_full_table", "argPatterns": ["leagueId=39"] },
+          { "toolName": "get_top_scorers", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(top|goal|scorer|Premier League)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "combined-week-review-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "combined_queries",
+      "tags": ["result", "standings", "last-week"],
+      "question": "How did United's week go — results and current league position?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures_range", "get_standings"],
+          "requiredOrder": [["resolve_time", "get_fixtures_range"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_standings", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(result|position|point|match|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "combined-injuries-form-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "combined_queries",
+      "tags": ["injuries", "form", "standings"],
+      "question": "What's United's current form and who are they missing through injury?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_standings", "get_injuries"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_standings", "argPatterns": ["leagueId=39"] },
+          { "toolName": "get_injuries", "argPatterns": ["teamId=33"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(form|injur|missing|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "combined-hojlund-and-scorers-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "combined_queries",
+      "tags": ["player-stats", "top-scorers"],
+      "question": "How does Hojlund compare to the Premier League top scorers?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player", "get_top_scorers"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)(hojlund|rasmus)"] },
+          { "toolName": "get_top_scorers", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|compar|scorer|Hojlund|Højlund|Premier League)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "combined-defence-overview-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "combined_queries",
+      "tags": ["player-stats", "standings", "defensive"],
+      "question": "How solid is United's defence this season — goals conceded and who's playing?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_standings", "get_injuries"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_standings", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(concede|goal|defence|defender|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+
+
+    {
+      "id": "multi-a-turn1-001",
+      "conversationId": "conv-a-match-deep-dive",
+      "turnOrder": 1,
+      "category": "multi_turn",
+      "tags": ["result", "last-match"],
+      "question": "What was the result of United's last match?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures"],
+          "requiredOrder": [["resolve_time", "get_fixtures"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(result|won|lost|drew|score|no match|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "multi-a-turn2-001",
+      "conversationId": "conv-a-match-deep-dive",
+      "turnOrder": 2,
+      "category": "multi_turn",
+      "tags": ["events", "context-reuse"],
+      "question": "Who scored in that match?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_events"],
+          "requiredOrder": [],
+          "forbiddenTools": ["resolve_time"],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_events", "argPatterns": ["fixtureId=\\d+"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|scored|no goal|no event|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "multi-a-turn3-001",
+      "conversationId": "conv-a-match-deep-dive",
+      "turnOrder": 3,
+      "category": "multi_turn",
+      "tags": ["lineups", "context-reuse"],
+      "question": "What was the starting lineup for that game?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_lineups"],
+          "requiredOrder": [],
+          "forbiddenTools": ["resolve_time"],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_lineups", "argPatterns": ["fixtureId=\\d+"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(lineup|starting|formation|no lineup|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+
+    {
+      "id": "multi-b-turn1-001",
+      "conversationId": "conv-b-standings-deep-dive",
+      "turnOrder": 1,
+      "category": "multi_turn",
+      "tags": ["standings", "position"],
+      "question": "Where are United currently in the Premier League?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_standings"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_standings", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(position|rank|point|Premier League|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "multi-b-turn2-001",
+      "conversationId": "conv-b-standings-deep-dive",
+      "turnOrder": 2,
+      "category": "multi_turn",
+      "tags": ["standings", "context-reuse"],
+      "question": "How many points are they behind the leaders?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_full_table"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_full_table", "argPatterns": ["leagueId=39"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(point|behind|gap|leader|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.5, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "multi-b-turn3-001",
+      "conversationId": "conv-b-standings-deep-dive",
+      "turnOrder": 3,
+      "category": "multi_turn",
+      "tags": ["standings", "context-reuse", "champions-league"],
+      "question": "Can they still make the top 4?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": [],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(top 4|Champions League|possible|point|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+
+    {
+      "id": "multi-c-turn1-001",
+      "conversationId": "conv-c-player-comparison",
+      "turnOrder": 1,
+      "category": "multi_turn",
+      "tags": ["player-stats", "goals"],
+      "question": "How many goals has Bruno Fernandes scored this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)(bruno|fernandes)"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(goal|Bruno|Fernandes)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "multi-c-turn2-001",
+      "conversationId": "conv-c-player-comparison",
+      "turnOrder": 2,
+      "category": "multi_turn",
+      "tags": ["player-stats", "context-reuse", "assists"],
+      "question": "How many assists does he have as well?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": [],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(assist|Bruno|Fernandes)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "multi-c-turn3-001",
+      "conversationId": "conv-c-player-comparison",
+      "turnOrder": 3,
+      "category": "multi_turn",
+      "tags": ["player-stats", "different-player"],
+      "question": "How does that compare to Rashford's numbers?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)rashford"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(Rashford|goal|assist|compar)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+
+    {
+      "id": "multi-d-turn1-001",
+      "conversationId": "conv-d-injury-deep-dive",
+      "turnOrder": 1,
+      "category": "multi_turn",
+      "tags": ["injuries", "team-news"],
+      "question": "Who's injured at United right now?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_injuries"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "EXACT"
+        },
+        "parameters": [
+          { "toolName": "get_injuries", "argPatterns": ["teamId=33"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(injur|no injury|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "multi-d-turn2-001",
+      "conversationId": "conv-d-injury-deep-dive",
+      "turnOrder": 2,
+      "category": "multi_turn",
+      "tags": ["injuries", "context-reuse"],
+      "question": "When is Maguire expected back?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": [],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(Maguire|return|back|injur|no data|not available)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "multi-d-turn3-001",
+      "conversationId": "conv-d-injury-deep-dive",
+      "turnOrder": 3,
+      "category": "multi_turn",
+      "tags": ["injuries", "upcoming-match"],
+      "question": "Will United be close to full strength for their next match?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": [],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(strength|available|injur|squad|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+
+    {
+      "id": "multi-e-turn1-001",
+      "conversationId": "conv-e-match-analysis",
+      "turnOrder": 1,
+      "category": "multi_turn",
+      "tags": ["result", "yesterday"],
+      "question": "Did United play yesterday and if so what was the score?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures"],
+          "requiredOrder": [["resolve_time", "get_fixtures"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "resolve_time", "argPatterns": ["(?i)yesterday"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(score|result|no match|played|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 25000
+      }
+    },
+    {
+      "id": "multi-e-turn2-001",
+      "conversationId": "conv-e-match-analysis",
+      "turnOrder": 2,
+      "category": "multi_turn",
+      "tags": ["lineups", "context-reuse"],
+      "question": "What formation did Amorim use?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_lineups"],
+          "requiredOrder": [],
+          "forbiddenTools": ["resolve_time"],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_lineups", "argPatterns": ["fixtureId=\\d+"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(formation|4-|3-|lineup|no lineup|Amorim|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "multi-e-turn3-001",
+      "conversationId": "conv-e-match-analysis",
+      "turnOrder": 3,
+      "category": "multi_turn",
+      "tags": ["stats", "context-reuse"],
+      "question": "How many shots did they have in that match?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["get_match_stats"],
+          "requiredOrder": [],
+          "forbiddenTools": ["resolve_time"],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "get_match_stats", "argPatterns": ["fixtureId=\\d+"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(shot|attempt|no stat|no match|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+
+    {
+      "id": "edge-future-date-no-data-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "edge_cases",
+      "tags": ["no-data", "future"],
+      "question": "What was the score in United's match on January 1st 2099?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time", "get_fixtures"],
+          "requiredOrder": [["resolve_time", "get_fixtures"]],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(no fixture|no match|no data|not found|2099|future)"],
+          "forbiddenPatterns": ["(?i)(as an AI|I cannot determine|scored|won|lost)"]
+        },
+        "confidence": { "min": 0.0, "max": 0.5 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "edge-vague-question-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "edge_cases",
+      "tags": ["vague"],
+      "question": "Tell me about United",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": [],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(manchester united|club|team)"],
+          "forbiddenPatterns": ["(?i)(as an AI I cannot|error|crash)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "edge-irrelevant-question-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "edge_cases",
+      "tags": ["off-topic"],
+      "question": "What is the capital of France?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": [],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(Paris|france|manchester united|football|not|redirect)"],
+          "forbiddenPatterns": ["(?i)(error|crash)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 15000
+      }
+    },
+    {
+      "id": "edge-unknown-player-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "edge_cases",
+      "tags": ["unknown-player"],
+      "question": "How many goals has John Smith scored for United this season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["find_player"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [
+          { "toolName": "find_player", "argPatterns": ["(?i)(john smith|john|smith)"] }
+        ],
+        "answer": {
+          "requiredPatterns": ["(?i)(not found|no player|no data|don.t have|John Smith)"],
+          "forbiddenPatterns": ["(?i)(scored \\d+ goals|\\d+ assists)"]
+        },
+        "confidence": { "min": 0.0, "max": 0.5 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "edge-partial-question-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "edge_cases",
+      "tags": ["minimal-input"],
+      "question": "Score?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": [],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(score|match|clarif|which|please|manchester united)"],
+          "forbiddenPatterns": ["(?i)(error|crash|as an AI I cannot)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "edge-other-team-question-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "edge_cases",
+      "tags": ["other-team"],
+      "question": "How did Liverpool do yesterday?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(Liverpool|Manchester United|speciali[sz]|only|team)"],
+          "forbiddenPatterns": ["(?i)(error|crash)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    },
+    {
+      "id": "edge-historical-season-001",
+      "conversationId": null,
+      "turnOrder": 0,
+      "category": "edge_cases",
+      "tags": ["historical", "old-season"],
+      "question": "How many goals did United score in the 2018-19 season?",
+      "expectations": {
+        "toolChain": {
+          "requiredTools": ["resolve_time"],
+          "requiredOrder": [],
+          "forbiddenTools": [],
+          "mode": "SUBSET"
+        },
+        "parameters": [],
+        "answer": {
+          "requiredPatterns": ["(?i)(2018|2019|season|goal|no data|not available|Manchester United)"],
+          "forbiddenPatterns": ["(?i)(as an AI I cannot|error|crash)"]
+        },
+        "confidence": { "min": 0.0, "max": 1.0 },
+        "maxLatencyMs": 20000
+      }
+    }
+  ]
+}

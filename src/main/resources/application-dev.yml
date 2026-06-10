@@ -1,0 +1,29 @@
+# Dev profile — local development defaults
+# Run with: --spring.profiles.active=dev  OR  set SPRING_PROFILES_ACTIVE=dev
+
+manu4u:
+  guest-api-key: ${MANU4U_GUEST_API_KEY:dev-guest-key-local}
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/manu4u}
+    username: ${DB_USERNAME:manu4u}
+    password: ${DB_PASSWORD:manu4u}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  ai:
+    vectorstore:
+      qdrant:
+        host: ${QDRANT_HOST:localhost}
+        port: ${QDRANT_PORT:6334}
+
+logging:
+  level:
+    root: INFO
+    com.manu4u: DEBUG
+    org.springframework.ai.chat.client: DEBUG
+    org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor: DEBUG
+    org.springframework.ai.model.tool: DEBUG
+    org.springframework.ai.openai: DEBUG

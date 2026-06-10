@@ -1,0 +1,20 @@
+# Staging profile — mirrors prod config, connects to staging infra
+# All secrets via environment variables — no defaults
+
+manu4u:
+  guest-api-key: ${MANU4U_GUEST_API_KEY}
+
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+logging:
+  level:
+    root: INFO
+    com.manu4u: INFO

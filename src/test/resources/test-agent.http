@@ -1,0 +1,47 @@
+### Ask about today's match (triggers resolve_time -> get_fixtures -> get_events)
+POST http://localhost:8080/ask
+Content-Type: application/json
+
+{
+  "question": "Who scored for United today?"
+}
+
+###
+
+### Ask about lineup
+POST http://localhost:8080/ask
+Content-Type: application/json
+
+{
+  "question": "Who started at right-back in United's last match?"
+}
+
+###
+
+### Historical question (triggers search_knowledge_base)
+POST http://localhost:8080/ask
+Content-Type: application/json
+
+{
+  "question": "Tell me about the 1999 Treble"
+}
+
+###
+
+### Player bio (triggers search_knowledge_base with player_bio filter)
+POST http://localhost:8080/ask
+Content-Type: application/json
+
+{
+  "question": "Who is Eric Cantona?"
+}
+
+###
+
+### No match scenario
+POST http://localhost:8080/ask
+Content-Type: application/json
+
+{
+  "question": "What was United's formation in yesterday's match?"
+}

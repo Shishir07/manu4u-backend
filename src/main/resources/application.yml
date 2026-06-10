@@ -1,0 +1,61 @@
+manu4u:
+  timezone: America/Vancouver
+  defaultTeamId: 33
+  defaultLeagueId: 39
+  knowledge-base-enabled: false
+  # guest-api-key: set via MANU4U_GUEST_API_KEY env var (required in staging/prod)
+  #                default provided in application-dev.yml for local development
+
+apifootball:
+  baseUrl: https://v3.football.api-sports.io
+  apiKey: ${API_FOOTBALL_KEY}
+
+springdoc:
+  packages-to-scan: com.manu4u.tools.controller
+  paths-to-match: /**
+  show-actuator: false
+
+spring:
+  datasource:
+    # URL/credentials are profile-specific — see application-dev.yml / application-prod.yml.
+    # Base config only sets the driver and pool tuning that is common across all environments.
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+        jdbc.batch_size: 50
+        order_inserts: true
+        order_updates: true
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-4o
+          temperature: 0.0
+      embedding:
+        options:
+          model: text-embedding-3-small
+    vectorstore:
+      qdrant:
+        host: ${QDRANT_HOST}
+        port: ${QDRANT_PORT}
+        collection-name: manutd_knowledge
+        initialize-schema: false
+
+logging:
+  level:
+    root: INFO
+    com.manu4u: INFO
