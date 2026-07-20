@@ -1,0 +1,12 @@
+TOPIC: Sir Bobby Charlton — Munich survivor, World Cup winner, Manchester United's conscience (played 1956–1973)
+CATEGORY: legend   AS OF: 2026-07   STATUS: stable-history
+
+Sir Bobby Charlton was Manchester United's greatest ambassador: a Munich air disaster survivor who became a World Cup winner and Ballon d'Or holder in 1966, scored 249 goals in 758 Manchester United appearances — both club records for decades — and lifted the European Cup as captain in 1968. He died on 21 October 2023, aged 86.
+
+Born on 11 October 1937 in Ashington, Northumberland, into the footballing Milburn family (his brother Jack Charlton won the 1966 World Cup alongside him), Bobby Charlton joined Manchester United as a teenager and debuted in 1956 as one of the Busby Babes. He survived the Munich air disaster of 6 February 1958 — dragged from the wreckage still strapped to his seat by goalkeeper Harry Gregg — and carried the emotional weight of Munich for the rest of his life.
+
+Charlton evolved from winger into a deep-lying attacking midfielder famed for surging runs, raking passes and ferocious long-range shooting off either foot, his comb-over flying. He won three league titles with Manchester United (1956-57, 1964-65, 1966-67) and the FA Cup in 1963. In the 1968 European Cup final at Wembley he captained Manchester United and scored twice in the 4-1 extra-time win over Benfica — the fulfilment of the post-Munich mission he shared with Matt Busby.
+
+For England, Charlton won 106 caps and scored 49 goals, an England record that stood until Wayne Rooney passed it in 2015. He was the driving force of England's 1966 World Cup win — scoring both goals in the semi-final against Portugal — and won both the Ballon d'Or and the World Cup in 1966. His 249 goals in 758 appearances for Manchester United were club records until Wayne Rooney passed the goals mark in 2017 and Ryan Giggs the appearances mark in 2008.
+
+After retiring in 1973, Charlton served as a Manchester United director from 1984 and was the club's global statesman; he coined Old Trafford's nickname, the "Theatre of Dreams". He was knighted in 1994. The South Stand at Old Trafford was renamed the Sir Bobby Charlton Stand in 2016. He is commemorated in the United Trinity statue with George Best and Denis Law. Sir Bobby Charlton died on 21 October 2023; his funeral procession paused at Old Trafford as thousands lined the streets.
