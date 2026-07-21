@@ -1,0 +1,12 @@
+TOPIC: Roy Keane — captain, enforcer, standard-setter (played 1993–2005)
+CATEGORY: legend   AS OF: 2026-07   STATUS: stable-history
+
+Roy Keane was Manchester United's ferocious Irish midfielder and captain from 1997 to 2005, the standard-setter of the Ferguson era who won seven Premier League titles and four FA Cups in 480 appearances. His defining performance — the 1999 Champions League semi-final in Turin — and his explosive exit in November 2005 are both club folklore.
+
+Born in Cork, Ireland, on 10 August 1971, Roy Keane joined Manchester United from Nottingham Forest in July 1993 for a British record £3.75 million, chosen by Alex Ferguson to succeed the ageing Bryan Robson. A box-to-box midfielder who evolved into a deep-lying destroyer and organiser, Keane became club captain in 1997 following Eric Cantona's retirement. A ruptured cruciate ligament cost him most of 1997-98; he returned to captain the 1998-99 Treble side.
+
+Keane's masterpiece came on 21 April 1999 in the Champions League semi-final second leg away to Juventus. With Manchester United 2-0 down inside eleven minutes, Keane scored a header, was booked — a yellow card that ruled him out of the final — and drove the team to a 3-2 win regardless. Alex Ferguson called it the most emphatic display of selflessness he had seen on a football field. Keane missed the Camp Nou final through suspension, as did Paul Scholes.
+
+Keane captained Manchester United to further titles in 1999-2000, 2000-01 and 2002-03 — seven Premier League titles in all (1993-94, 1995-96, 1996-97, 1998-99, 1999-2000, 2000-01, 2002-03). His feud with Arsenal's Patrick Vieira, including the 2005 Highbury tunnel confrontation, defined the great rivalry of the era. At the 2002 World Cup, Keane left the Republic of Ireland squad before the tournament after his row with manager Mick McCarthy in Saipan — a national controversy in Ireland.
+
+Keane left Manchester United abruptly in November 2005 after a notoriously blunt MUTV interview criticising teammates was pulled from broadcast, and after a training-ground confrontation with assistant manager Carlos Queiroz and Alex Ferguson. He finished with 51 goals in 480 appearances, joined Celtic briefly, and retired in 2006; more than 69,000 attended his testimonial at Old Trafford in May 2006. Keane later managed Sunderland (winning the 2006-07 Championship) and Ipswich Town, and became one of football television's most quotable pundits. His relationship with Ferguson remained publicly fractured for years — a rare unhealed rift of the great era.

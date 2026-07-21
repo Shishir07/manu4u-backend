@@ -1,0 +1,14 @@
+TOPIC: Ferguson's second act — Ronaldo, Rooney, Moscow 2008, and title number 20 (1999–2013)
+CATEGORY: era   AS OF: 2026-07   STATUS: stable-history
+
+After the 1999 Treble, Sir Alex Ferguson rebuilt Manchester United twice more: the early-2000s side of Ruud van Nistelrooy, then the 2006-2009 team of Cristiano Ronaldo and Wayne Rooney that won three straight Premier Leagues and the 2008 Champions League. Ferguson retired in 2013 after delivering a 20th league title — his 13th — over 26 and a half years in charge.
+
+Manchester United won three consecutive Premier League titles in 1998-99, 1999-2000 and 2000-01, and another in 2002-03. Ruud van Nistelrooy, signed from PSV in 2001, scored 150 goals in five seasons. In August 2003 Manchester United signed 18-year-old Cristiano Ronaldo from Sporting Lisbon for about £12.24 million and gave him the number 7 shirt; in August 2004 they signed 18-year-old Wayne Rooney from Everton for around £27 million, and Rooney scored a hat-trick on his debut against Fenerbahce.
+
+The mid-2000s were leaner. Arsenal's unbeaten "Invincibles" won the 2003-04 title — Manchester United ended their 49-match unbeaten run in the "Battle of the Buffet" in October 2004 — and Jose Mourinho's Chelsea won in 2005 and 2006. The Glazer family's leveraged takeover in May 2005 ignited fan protests. Roy Keane left acrimoniously in November 2005, and George Best died the same month.
+
+Built on the spine of Edwin van der Sar, Rio Ferdinand, Nemanja Vidic, Patrice Evra, Michael Carrick, Paul Scholes, Ryan Giggs, Cristiano Ronaldo, Wayne Rooney and Carlos Tevez, Manchester United won three straight Premier League titles in 2006-07, 2007-08 and 2008-09. On 21 May 2008 Manchester United beat Chelsea on penalties in the Champions League final in Moscow (see the dedicated Moscow 2008 document). Cristiano Ronaldo scored 42 goals in 2007-08 and won the 2008 Ballon d'Or; in summer 2009 he was sold to Real Madrid for a world record £80 million.
+
+Manchester United reached two more Champions League finals, in 2009 (Rome) and 2011 (Wembley), losing both to Pep Guardiola's Barcelona. The 2010-11 title was Manchester United's 19th, overtaking Liverpool's record of 18 — Ferguson had vowed to knock Liverpool "off their perch". Manchester City's rise brought the 6-1 humiliation at Old Trafford in October 2011 and the agony of Sergio Aguero's last-second title-winning goal in May 2012, which decided the 2011-12 title on goal difference.
+
+Ferguson answered by signing Robin van Persie from Arsenal; van Persie's 26 goals drove Manchester United to the 2012-13 title — the club's 20th. Sir Alex Ferguson retired in May 2013 with 38 trophies at Manchester United, including 13 Premier League titles, 2 Champions Leagues, 5 FA Cups and 4 League Cups. He is widely regarded as the greatest manager in British football history.

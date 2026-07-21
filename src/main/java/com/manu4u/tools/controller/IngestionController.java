@@ -31,9 +31,11 @@ public class IngestionController {
     private final StaticFileLoaderService staticFileLoaderService;
     private final DocumentIngestionService documentIngestionService;
 
-    @Operation(summary = "Ingest all .txt files from the knowledge directory",
-               description = "Scans src/main/resources/knowledge/, chunks and embeds each .txt file. " +
-                             "Each file can have a companion .meta.json sidecar for metadata.")
+    @Operation(summary = "(Re-)ingest the knowledge corpus",
+               description = "Scans src/main/resources/knowledge/ for .md (and legacy .txt) files, parses each " +
+                             "file's TOPIC/CATEGORY/AS OF/STATUS header into metadata, chunks (800 tokens) and " +
+                             "embeds into Qdrant. Idempotent: each file replaces its previous points " +
+                             "(delete-by-source before add), so calling this repeatedly never duplicates.")
     @PostMapping("/files")
     public ResponseEntity<Map<String, Object>> ingestFiles() throws IOException {
         log.info("Starting bulk file ingestion");
