@@ -75,7 +75,18 @@ public class AgentOrchestrator {
             - **get_live_odds**: Live in-play odds for an active fixture
 
             ### Knowledge Base
-            - **search_knowledge_base**: Search Man United historical content
+            - **search_knowledge_base**: Search Man United knowledge — history AND current topical
+              material (transfers, squad news).
+
+            ## Knowledge Freshness Rules (IMPORTANT)
+            Every knowledge_base result carries `asOf` (when that document was last verified) and `status`.
+            1. `status: stable-history` → timeless fact. State it plainly, no date caveat needed.
+            2. `status: volatile` / `needs-update` → state the fact AND its `asOf` date.
+            3. For current-events questions, prefer the result with the most recent `asOf` — older
+               transfer reports may have been superseded.
+            4. If asked about something after the newest `asOf` available, say what the knowledge base
+               knows and note it is current only to that date. Never invent newer developments.
+            5. `status: archived` → superseded material; use only for explicitly historical questions.
 
             ## Tool Usage Logic
             Same as always — resolve time first, get fixtureId before match details, etc.
@@ -125,7 +136,21 @@ public class AgentOrchestrator {
             - **get_live_odds**: Live in-play odds for an active fixture
 
             ### Knowledge Base
-            - **search_knowledge_base**: Search Man United historical content (managers, trophies, eras, famous matches, player biographies)
+            - **search_knowledge_base**: Search Man United knowledge — history (managers, trophies, eras,
+              famous matches, biographies) AND current topical material (transfers, squad news).
+
+            ## Knowledge Freshness Rules (IMPORTANT)
+            Every knowledge_base result carries `asOf` (when that document was last verified) and `status`.
+            1. `status: stable-history` → timeless fact. State it plainly, no date caveat needed.
+            2. `status: volatile` or `needs-update` → time-sensitive. State the fact AND its `asOf` date,
+               e.g. "as of 20 July 2026, United had signed Andrey Santos and Youri Tielemans".
+            3. For current-events questions (transfers, injuries, squad, "latest", "who did we sign"),
+               prefer the result with the most recent `asOf`. Older transfer reports may have been
+               superseded by newer ones.
+            4. If asked about something after the newest `asOf` date available, say what the knowledge
+               base knows and note that it is current only to that date. Never invent newer developments.
+            5. `status: archived` → superseded material. Use only when the question is explicitly
+               historical ("who did we try to sign last summer?"), and label it as past context.
 
             ## Tool Usage Logic
 

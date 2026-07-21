@@ -5,6 +5,14 @@ manu4u:
   knowledge-base-enabled: false
   # guest-api-key: set via MANU4U_GUEST_API_KEY env var (required in staging/prod)
   #                default provided in application-dev.yml for local development
+  retrieval:
+    # Knowledge-base ranking — see RecencyRanker.
+    # Recency applies only to time-sensitive content (topical/news/volatile);
+    # stable-history and era/legend/moment documents are never decayed.
+    over-fetch-factor: 3      # pull topK*3 candidates, re-rank, truncate to topK
+    recency-weight: 0.15      # max freshness bonus (cosine similarity is ~0..1)
+    half-life-days: 45        # freshness bonus halves every 45 days
+    archive-penalty: 0.20     # demotion for status: archived
 
 apifootball:
   baseUrl: https://v3.football.api-sports.io
