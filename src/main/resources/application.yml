@@ -13,6 +13,7 @@ manu4u:
     recency-weight: 0.15      # max freshness bonus (cosine similarity is ~0..1)
     half-life-days: 45        # freshness bonus halves every 45 days
     archive-penalty: 0.20     # demotion for status: archived
+  #                (dev included — no secret defaults are committed)
 
 apifootball:
   baseUrl: https://v3.football.api-sports.io

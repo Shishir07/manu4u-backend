@@ -11,7 +11,7 @@ public class RagConfig {
      * Splitter for CURATED corpus documents only (raw news items are never split —
      * see DocumentIngestionService.SplitStrategy).
      *
-     * chunkSize=800 tokens: matches how the corpus is authored (CORPUS_GUIDE.md —
+     * chunkSize=800 tokens: matches how the corpus is authored (HISTORY.md §5 —
      * one topic per file, ~300–600 words). At 800, 13 of the 18 seed files fit in a
      * single chunk (chunk == document, the ideal for a one-topic-per-file corpus);
      * at the previous 512, the same files split into a full chunk plus a ~150-token

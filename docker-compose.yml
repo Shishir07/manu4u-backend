@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:16-alpine
@@ -7,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: manu4u
       POSTGRES_USER: manu4u
-      POSTGRES_PASSWORD: manu4u
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env (see .env.example)}
     ports:
       - "5432:5432"
     volumes:

@@ -24,7 +24,7 @@ public class DocumentIngestionService {
      * not global — the two content layers have opposite geometry:
      * <ul>
      *   <li>{@link #SPLIT} — curated corpus docs (era/legend/topical/…): multi-paragraph
-     *       essays authored for ~800-token chunks (see CORPUS_GUIDE.md).</li>
+     *       essays authored for ~800-token chunks (see HISTORY.md §5).</li>
      *   <li>{@link #NONE} — raw news items: already smaller than any chunk (50–300 tokens),
      *       one item = one embedding. Never split, and never batch multiple items into one
      *       document — a grab-bag chunk of unrelated items embeds to semantic mush.</li>

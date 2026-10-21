@@ -1,14 +1,15 @@
-# Dev profile — local development defaults
+# Dev profile — local development defaults for hosts/ports only.
+# Secrets (DB_PASSWORD, MANU4U_GUEST_API_KEY, API keys) always come from the environment — see .env.example.
 # Run with: --spring.profiles.active=dev  OR  set SPRING_PROFILES_ACTIVE=dev
 
 manu4u:
-  guest-api-key: ${MANU4U_GUEST_API_KEY:dev-guest-key-local}
+  guest-api-key: ${MANU4U_GUEST_API_KEY}
 
 spring:
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/manu4u}
     username: ${DB_USERNAME:manu4u}
-    password: ${DB_PASSWORD:manu4u}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -18,6 +19,7 @@ spring:
       qdrant:
         host: ${QDRANT_HOST:localhost}
         port: ${QDRANT_PORT:6334}
+        initialize-schema: true   # dev only: create the collection on first use (staging/prod keep it false)
 
 logging:
   level:
