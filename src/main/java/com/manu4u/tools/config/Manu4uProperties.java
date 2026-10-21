@@ -22,4 +22,31 @@ public class Manu4uProperties {
      * Not a secret in the traditional sense — its purpose is rate-limiting, not identity.
      */
     private String guestApiKey;
+
+    /** Knowledge-base retrieval tuning — see RecencyRanker. */
+    private Retrieval retrieval = new Retrieval();
+
+    @Data
+    public static class Retrieval {
+        /**
+         * Over-fetch multiplier: similaritySearch pulls topK * this, then the
+         * ranker re-scores and truncates back to topK. Larger = more candidates
+         * for recency to reorder, at slightly higher Qdrant cost.
+         */
+        private int overFetchFactor = 3;
+
+        /**
+         * Maximum additive recency bonus for a brand-new time-sensitive document.
+         * Cosine similarity is ~0..1, so 0.15 is enough to let a fresh document
+         * overtake a marginally better-matching stale one, without letting recency
+         * hijack a clearly historical query.
+         */
+        private double recencyWeight = 0.15;
+
+        /** Exponential decay half-life (days) applied to time-sensitive content. */
+        private double halfLifeDays = 45.0;
+
+        /** Additive penalty for documents whose status is 'archived'. */
+        private double archivePenalty = 0.20;
+    }
 }
