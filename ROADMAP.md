@@ -4,7 +4,8 @@
 all for topical news (where the freshest fact wins) and history (where the right document wins
 and stale data must never leak in).
 
-Scope is deliberately limited to ingestion and retrieval correctness. Parked items outside that
+Scope is deliberately limited to ingestion, retrieval correctness, and the data-access layer that
+feeds the agent (§10). Parked items outside that
 scope are listed in [HISTORY.md §7](HISTORY.md#7-current-status-known-bugs-and-improvements).
 
 ## Where things stand
@@ -112,6 +113,34 @@ prompt and the corpus writing rules, replacing the document under the same `sour
 Publishing is **gated on the retrieval evaluation in §5**: if the score drops, keep the
 previous document and log the diff for review. Only worth building once §2–§5 are in place.
 
+### 10. MCP integration for API-Football (retire the hand-written tools)
+Today every API-Football endpoint is wrapped by hand: a client method, DTOs, a normalizing
+tool class, and an `@Tool` wrapper (`ApiFootballClient`, `*Tool.java`, `LiveMatchToolsService`).
+Goal: let the agent reach API-Football through the **Model Context Protocol** as an MCP
+client, so new endpoints need no new Java and most of that code can be deleted.
+
+- **Verify first:** confirm an API-Football MCP server exists and is maintained, or decide to
+  run a thin one ourselves over the REST API. Do not assume; this decides the whole approach.
+- **Spring AI MCP client:** register the server and expose its tools to the `ChatClient`
+  alongside the remaining local tools.
+- **Keep what MCP does not give us**, and decide each explicitly before deleting code:
+  - the PostgreSQL fixture cache and API quota protection (MCP calls must still go through
+    the cache layer or an equivalent, or every question spends quota);
+  - normalized, size-bounded results (raw API payloads are large and hurt answer quality
+    and token cost);
+  - the fixes from the API audit (`league=` filtering on player stats, inner lineup fields,
+    standings groups) — the MCP path must reproduce them or the bugs return;
+  - `toolTrace`, so the eval harness keeps working (traces must record MCP tool names and
+    arguments).
+- **Migrate incrementally, behind a flag:** one endpoint family at a time (standings first,
+  lowest risk), run the eval suite on both paths, and delete the hand-written tool only when
+  scores match.
+- **Local tools that stay:** `resolve_time`, `find_player` (our DB lookup), `sync_squad` and
+  `search_knowledge_base` are not API-Football wrappers.
+
+Acceptance: the eval suite scores the same or better on the MCP path, per-question API calls
+do not increase, and the list of hand-written API-Football wrappers shrinks.
+
 ## Definition of done for this roadmap
 
 - Fetch, sync and archive are idempotent and safe to re-run.
@@ -119,3 +148,4 @@ previous document and log the diff for review. Only worth building once §2–§
   returns the right document with no spurious date caveat.
 - The retrieval evaluation runs in CI and blocks regressions.
 - Every ingested item can be traced to its source, date and status.
+- API-Football data reaches the agent through MCP with no loss of eval score, cache protection or traceability.
