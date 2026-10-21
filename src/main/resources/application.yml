@@ -4,7 +4,7 @@ manu4u:
   defaultLeagueId: 39
   knowledge-base-enabled: false
   # guest-api-key: set via MANU4U_GUEST_API_KEY env var (required in staging/prod)
-  #                default provided in application-dev.yml for local development
+  #                (dev included — no secret defaults are committed)
 
 apifootball:
   baseUrl: https://v3.football.api-sports.io

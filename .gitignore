@@ -32,10 +32,18 @@ build/
 ### VS Code ###
 .vscode/
 
-### Environment ###
+### Environment & secrets ###
 .env
+.env.*
 *.env
 !.env.example
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+secrets/
+credentials*.json
 
 ### Claude local settings ###
 .claude/settings.local.json
