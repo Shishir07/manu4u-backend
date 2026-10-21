@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 /**
  * Parses the plain-text header block that every knowledge corpus file starts with
- * (see CORPUS_GUIDE.md):
+ * (see HISTORY.md §5):
  *
  * <pre>
  * TOPIC: Alex Ferguson's rise — from near-sacking to the Treble (1986–1999)

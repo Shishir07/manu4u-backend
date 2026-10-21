@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * Loads the curated knowledge corpus from src/main/resources/knowledge/ into the
  * vector store. Files are flat, prefix-categorized markdown (era-, moment-, legend-,
- * club-, season-, topical-) — see CORPUS_GUIDE.md for authoring conventions.
+ * club-, season-, topical-) — see HISTORY.md §5 for authoring conventions.
  *
  * Metadata resolution per file (later layers override earlier ones):
  *   1. filename-derived defaults (source, contentType=history)
